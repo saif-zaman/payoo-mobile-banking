@@ -1,5 +1,5 @@
 // login button functionality
-document.getElementById('loginButton').addEventListener('click', function(e) {
+document.getElementById('loginButton').addEventListener('click', function (e) {
     e.preventDefault();
     const mobileNumber = 12345678910; // predefined mobile number
     const pinNumber = 1234; // predefined pin
