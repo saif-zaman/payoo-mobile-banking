@@ -1,3 +1,4 @@
+// add money functionality
 document.getElementById('add-money-btn').addEventListener('click', function (e) {
     e.preventDefault();
 
@@ -25,6 +26,21 @@ document.getElementById('add-money-btn').addEventListener('click', function (e) 
     document.getElementById('available-balance').innerText = newBalance
 
 })
+
+// cash out functionality
+document.getElementById('withdraw-btn').addEventListener('click', function (e) {
+    e.preventDefault()
+    const amount = parseInt(document.getElementById('withdraw-amount').value)
+    const availableBalance = parseInt(document.getElementById('available-balance').innerText)
+
+    const totalNewAvailableBalance = availableBalance - amount
+
+    document.getElementById('available-balance').innerText = totalNewAvailableBalance
+})
+
+
+
+
 // function to toggle
 function handleToggle(id) {
     const forms = document.getElementsByClassName("form")
