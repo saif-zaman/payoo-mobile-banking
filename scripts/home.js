@@ -1,5 +1,9 @@
 const validPin = 1234
-// function to get input values
+
+const transactionData = []
+
+
+// functions to get input values
 function getInputValueNumber(id) {
     const inputField = document.getElementById(id)
     const inputFieldValue = inputField.value
@@ -8,6 +12,19 @@ function getInputValueNumber(id) {
     return inputFieldValueNumber
 }
 
+// function to get inner text value as number
+function getInnerTextValueNumber(id) {
+    const element = document.getElementById(id)
+    const elementValue = element.innerText
+    const elementValueNumber = parseInt(elementValue)
+    return elementValueNumber
+}
+
+// function to set inner text
+function setInnerText(value) {
+    const availableBalanceElement = document.getElementById("available-balance")
+    availableBalanceElement.innerText = value
+}
 
 
 // add money functionality
@@ -19,7 +36,13 @@ document.getElementById("add-money-btn").addEventListener("click", function (e) 
     const amount = getInputValueNumber("add-amount")
     const pin = getInputValueNumber("add-pin")
 
-    const availableBalance = parseInt(document.getElementById("available-balance").innerText)
+    const availableBalance = getInnerTextValueNumber("available-balance")
+
+    if (bank === "Select Bank") {
+        alert("Please select a bank")
+        return
+    }
+
     if (accountNumber.length < 10) {
         alert("Account number must be 10 digits")
         return
@@ -33,7 +56,13 @@ document.getElementById("add-money-btn").addEventListener("click", function (e) 
 
     const totalNewAvailableBalance = availableBalance + amount
 
-    document.getElementById("available-balance").innerText = totalNewAvailableBalance
+    setInnerText(totalNewAvailableBalance)
+
+    const data = {
+        name: "Add Money",
+        date: new Date().toLocaleDateString()
+    }
+    transactionData.push(data)
 })
 
 
@@ -41,12 +70,47 @@ document.getElementById("add-money-btn").addEventListener("click", function (e) 
 document.getElementById("withdraw-btn").addEventListener("click", function (e) {
     e.preventDefault()
     const amount = getInputValueNumber("withdraw-amount")
-    const availableBalance = parseInt(document.getElementById("available-balance").innerText)
+    const availableBalance = getInnerTextValueNumber("available-balance")
 
     const totalNewAvailableBalance = availableBalance - amount
 
-    document.getElementById("available-balance").innerText = totalNewAvailableBalance
+    setInnerText(totalNewAvailableBalance)
+    const data = {
+        name: "Cashout",
+        date: new Date().toLocaleDateString()
+    }
+    transactionData.push(data)
 })
+
+// transfer money functionality
+document.getElementById("transfer-btn").addEventListener("click", function (e) {
+    e.preventDefault()
+})
+
+// transactions functionality
+document.getElementById("transactions-button").addEventListener("click", function (e) {
+    const transactionContainer = document.getElementById("transaction-container")
+
+    for (const data of transactionData) {
+        const div = document.createElement("div")
+        div.innerHTML = `
+        <div class="bg-white rounded-xl p-3 flex justify-between items-center">
+                    <div class="flex items-center">
+                        <div class=" p-3 rounded-full bg-[#f4f5f7]">
+                            <img class="mx-auto" src="./assets/wallet1.png" alt="">
+                        </div>
+                        <div class="ml-3">
+                            <h2>${data.name}</h2>
+                            <p>${data.date}</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                </div>`
+        transactionContainer.appendChild(div)
+    }
+
+})
+
 
 
 
