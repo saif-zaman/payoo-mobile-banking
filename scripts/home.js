@@ -85,7 +85,29 @@ document.getElementById("withdraw-btn").addEventListener("click", function (e) {
 // transfer money functionality
 document.getElementById("transfer-btn").addEventListener("click", function (e) {
     e.preventDefault()
+    const amount = getInputValueNumber("transfer-amount")
+    const availableBalance = getInnerTextValueNumber("available-balance")
+
+    const totalNewAvailableBalance = availableBalance - amount
+
+    setInnerText(totalNewAvailableBalance)
+    const data = {
+        name: "Transfer Money",
+        date: new Date().toLocaleDateString()
+    }
+    transactionData.push(data)
 })
+
+// get bonus functionality
+document.getElementById("bonus-btn").addEventListener("click", function (e) {
+    e.preventDefault()
+})
+
+// pay bill functionality
+document.getElementById("pay-bill-btn").addEventListener("click", function (e) {
+    e.preventDefault()
+})
+
 
 // transactions functionality
 document.getElementById("transactions-button").addEventListener("click", function (e) {
