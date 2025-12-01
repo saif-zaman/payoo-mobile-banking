@@ -88,6 +88,7 @@ document.getElementById("transfer-btn").addEventListener("click", function (e) {
     const amount = getInputValueNumber("transfer-amount")
     const availableBalance = getInnerTextValueNumber("available-balance")
 
+
     const totalNewAvailableBalance = availableBalance - amount
 
     setInnerText(totalNewAvailableBalance)
@@ -96,16 +97,31 @@ document.getElementById("transfer-btn").addEventListener("click", function (e) {
         date: new Date().toLocaleDateString()
     }
     transactionData.push(data)
-})
 
+
+})
 // get bonus functionality
 document.getElementById("bonus-btn").addEventListener("click", function (e) {
     e.preventDefault()
+
+
 })
 
 // pay bill functionality
 document.getElementById("pay-bill-btn").addEventListener("click", function (e) {
     e.preventDefault()
+
+    const amount = getInputValueNumber("pay-amount")
+    const availableBalance = getInnerTextValueNumber("available-balance")
+
+    const totalNewAvailableBalance = availableBalance - amount
+
+    setInnerText(totalNewAvailableBalance)
+    const data = {
+        name: "Pay Bill",
+        date: new Date().toLocaleDateString()
+    }
+    transactionData.push(data)
 })
 
 
